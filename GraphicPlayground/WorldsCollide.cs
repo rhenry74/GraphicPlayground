@@ -32,7 +32,7 @@ namespace GraphicPlayground
 
         SoundPlayer CenterMissPlayer;
         SoundPlayer LeftMissPlayer;
-        string RightMissPlayer;
+        SoundPlayer RightMissPlayer;
 
         public WorldsCollide()
         {
@@ -46,7 +46,7 @@ namespace GraphicPlayground
 
             CenterMissPlayer = new System.Media.SoundPlayer(@"c:\SoundEffects\miss_center.wav");
             LeftMissPlayer = new System.Media.SoundPlayer(@"c:\SoundEffects\miss_left.wav");
-            //RightMissPlayer = new System.Media.SoundPlayer(@"c:\SoundEffects\miss_right.wav");
+            RightMissPlayer = new System.Media.SoundPlayer(@"c:\SoundEffects\miss_right.wav");
         }
 
         public void Setup(int w, int h, int count, IHost host = null)
@@ -86,12 +86,6 @@ namespace GraphicPlayground
                     StarCollection.Add(star);
                 }
             }
-
-            if (host != null)
-            {
-                RightMissPlayer = host.LoadWav(@"c:\SoundEffects\miss_right.wav");
-            }
-
         }
 
         private long CollisionCount = 0;
@@ -255,7 +249,7 @@ namespace GraphicPlayground
                     }
                     else if (mouseEvent.Location.X > host.Width / 3 * 2)
                     {
-                        host.PlayBuffer(RightMissPlayer);
+                        RightMissPlayer.Play();
                     }
                     else
                     {
